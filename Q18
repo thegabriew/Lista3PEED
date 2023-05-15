@@ -1,0 +1,46 @@
+class Stack:
+    def __init__(self):
+        self.items = []  
+
+    def push(self, item):
+        self.items.append(item)
+
+    def pop(self):
+        return self.items.pop() 
+
+    def peek(self):
+        return self.items[-1]  
+
+    def is_empty(self):
+        return len(self.items) == 0  
+
+
+#Calculando a expressão na notação polonesa reversa usando uma pilha
+def not_pol(exp):
+    stack = Stack()  
+
+    #Loop para percorrer cada caractere na expressão
+    for char in exp:
+        if char.isdigit():  # Se o caractere for um num, empilha o operando correspondente na pilha
+            stack.push(int(char))
+        else:  # Se o caractere for um operador, desempilha dois operandos e executa a operação correspondente
+            op2 = stack.pop()
+            op1 = stack.pop()
+
+            if char == '+':
+                result = op1 + op2
+            elif char == '-':
+                result = op1 - op2
+            elif char == '*':
+                result = op1 * op2
+            elif char == '/':
+                result = op1 / op2
+
+            stack.push(result)  
+
+    return stack.pop()  
+
+#Implementado
+exp = input("Digite uma expressão na notação polonesa reversa: ")
+result = not_pol(exp)
+print(f'O resultado da expressão {exp} é {result}.')
