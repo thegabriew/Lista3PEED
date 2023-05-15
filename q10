@@ -1,0 +1,45 @@
+class Stack:
+    def __init__(self):
+        self.items = []  
+
+    def push(self, item):
+        self.items.append(item)  
+
+    def pop(self):
+        return self.items.pop()  
+
+    def peek(self):
+        return self.items[-1] 
+
+    def is_empty(self):
+        return len(self.items) == 0  
+
+
+#Função para verificar a validade de uma expressão aritmética usando uma pilha
+
+def is_valid_expression(exp):
+    stack = Stack()  
+
+    for char in exp:
+        if char == '(':  #Se o caractere for um parêntese aberto, empilha o caractere correspondente na pilha
+            stack.push(char)
+        elif char == ')':  #Se o caractere for um parêntese fechado, verifica se a pilha não está vazia e se o elemento no topo é um parêntese aberto
+            if stack.is_empty() or stack.pop() != '(':
+                return False
+        elif char in '+-*/':  #Se o caractere for um operador, verifica se a pilha tem pelo menos dois operandos (dois parênteses abertos)
+            if stack.is_empty() or stack.peek() not in '(':  # Verifica se a pilha está vazia ou se o elemento no topo não é um parêntese aberto
+                return False
+            stack.pop()  #Remove o parêntese aberto do topo da pilha
+            if stack.is_empty() or stack.peek() not in '(':  # Verifica se a pilha está vazia ou se o elemento no topo não é um segundo parêntese aberto
+                return False
+
+    return stack.is_empty()  #Retorna True se a pilha estiver vazia (ou seja, se todos os parênteses foram fechados corretamente) e False caso contrário
+
+
+#Implementando
+exp = input("Digite uma expressão aritmética: ")
+
+if is_valid_expression(exp):
+    print("A expressão é válida.")
+else:
+    print("A expressão é inválida.")
