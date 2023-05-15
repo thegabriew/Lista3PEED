@@ -1,0 +1,48 @@
+class Stack:
+    def __init__(self):
+        self.items = [] 
+
+    def push(self, item):
+        self.items.append(item) 
+
+    def pop(self):
+        return self.items.pop() 
+
+    def peek(self):
+        return self.items[-1] 
+
+    def is_empty(self):
+        return len(self.items) == 0  
+
+# Função para verificar se uma string contendo caracteres (), {} e [] está balanceada usando uma pilha
+def esta_balanceada(s):
+    stack = Stack() 
+
+    for char in s:
+        if char in '({[':  
+            stack.push(char)
+        elif char in ')}]':  
+            if stack.is_empty() or not esta_correto(stack.peek(), char):
+                return False
+            stack.pop() 
+
+    return stack.is_empty()  
+
+#Função auxiliar para verificar se dois caracteres correspondem a um par de abertura e fechamento
+def esta_correto(abertura, fechamento):
+    if abertura == '(' and fechamento == ')':
+        return True
+    elif abertura == '{' and fechamento == '}':
+        return True
+    elif abertura == '[' and fechamento == ']':
+        return True
+    else:
+        return False
+
+#Implementando
+s = input("Digite uma string contendo caracteres (), {} e []: ")
+
+if esta_balanceada(s):
+    print("A string está balanceada.")
+else:
+    print("A string não está balanceada.")
