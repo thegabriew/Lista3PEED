@@ -1,0 +1,38 @@
+#criando a pilha
+
+class Stack:
+    def __init__(self):
+        self.items = []
+
+    def push(self, item):
+        self.items.append(item)
+
+    def pop(self):
+        return self.items.pop()
+
+    def is_empty(self):
+        return len(self.items) == 0
+    
+#Verificando
+
+def pali(palavra):
+    stack = Stack()
+
+    novapalavra = ''
+
+    for char in palavra:
+        stack.push(char)
+        
+    while not stack.is_empty():
+        novapalavra += stack.pop()
+    
+    return novapalavra
+
+#Implementando
+palavra = input("Insira uma palavra: ") 
+novapalavra = pali(palavra) 
+
+if novapalavra == palavra:
+    print("É um palíndromo")
+else:
+    print("Não é um palíndromo")
