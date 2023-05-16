@@ -1,0 +1,34 @@
+class Stack:
+    def __init__(self):
+        self.items = []
+
+    def push(self, item):
+        self.items.append(item)
+
+    def pop(self):
+        return self.items.pop()
+
+    def is_empty(self):
+        return len(self.items) == 0
+
+def str_to_int(string):
+    pilha = Stack()
+
+    for char in string:
+        if char.isdigit():
+            pilha.push(int(char))
+        else:
+            print("Há letras entre os números.")
+            return
+
+    numeros = []
+    while not pilha.is_empty():
+        numeros.append(pilha.pop())
+
+    numeros.reverse()
+    print("Números encontrados:", numeros)
+
+#Implementando
+
+string = input("Digite uma string: ")
+str_to_int(string)
