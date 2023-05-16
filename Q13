@@ -1,0 +1,36 @@
+class Stack:
+    def __init__(self):
+        self.items = []
+
+    def push(self, item):
+        self.items.append(item)
+
+    def pop(self):
+        return self.items.pop()
+
+    def is_empty(self):
+        return len(self.items) == 0
+
+def bin_p_dec(binario):
+    stack = Stack()
+
+    # Empilha cada dígito binário
+    for num in binario:
+        stack.push(int(num))
+
+    numero = 0
+    posicao = 0
+
+    # Desempilha os dígitos binários e calcula o número decimal
+    while not stack.is_empty():
+        num = stack.pop()
+        numero += num * (2 ** posicao)
+        posicao += 1
+
+    return numero
+
+#Implementando
+
+binario = input("Insira um número binário: ")
+decimal = bin_p_dec(binario)
+print(f'O número decimal correspondente é: {decimal}')
