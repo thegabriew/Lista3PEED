@@ -1,0 +1,32 @@
+class Stack:
+    def __init__(self):
+        self.items = []
+
+    def push(self, item):
+        self.items.append(item)
+
+    def pop(self):
+        return self.items.pop()
+
+    def is_empty(self):
+        return len(self.items) == 0
+
+def str_p_bin(string):
+    pilha = Stack()
+
+    for char in string:
+        pilha.push(char)
+
+    binario = ''
+
+    while not pilha.is_empty():
+        binario += pilha.pop()
+
+    return binario
+
+#Implementando
+
+string = input("Digite uma string contendo números: ")
+numero_binario = str_p_bin(string)
+
+print("O número binário correspondente é:", numero_binario)
