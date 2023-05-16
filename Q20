@@ -1,0 +1,37 @@
+class Stack:
+    def __init__(self):
+        self.items = []
+
+    def push(self, item):
+        self.items.append(item)
+
+    def pop(self):
+        return self.items.pop()
+
+    def is_empty(self):
+        return len(self.items) == 0
+
+def bin_p_hexa(binario):
+    stack = Stack()
+
+    for digito in binario:
+        stack.push(int(digito))
+
+    hexadecimal = ''
+    while not stack.is_empty():
+        numero = 0
+        for _ in range(4):
+            if not stack.is_empty():
+                numero += stack.pop() * (2 ** _)
+        if numero < 10:
+            hexadecimal += str(numero)
+        else:
+            hexadecimal += chr(ord('A') + numero - 10)
+
+    return hexadecimal[::-1]
+
+#Implementando
+
+binario = input("Digite um número binário: ")
+hexadecimal = bin_p_hexa(binario)
+print(f'{binario} em hexadecimal é {hexadecimal}.')
