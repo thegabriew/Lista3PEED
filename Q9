@@ -1,0 +1,35 @@
+class Stack:
+    def __init__(self):
+        self.items = []
+
+    def push(self, item):
+        self.items.append(item)
+
+    def pop(self):
+        return self.items.pop()
+
+    def is_empty(self):
+        return len(self.items) == 0
+
+def pali(sequencia):
+    stack = Stack()
+
+    for num in sequencia:
+        stack.push(int(num))  # Converte cada dígito para inteiro e empilha
+
+    seq_reversa = ''
+    while not stack.is_empty():
+        seq_reversa += str(stack.pop())  # Converte o dígito de volta para string e concatena
+
+    return seq_reversa == sequencia
+
+#Implementando
+
+numero = input("Insira um número: ")
+if numero.isdigit():  # Verifica se a string contém apenas dígitos numéricos
+    if pali(numero):
+        print("É um número palíndromo")
+    else:
+        print("Não é um número palíndromo")
+else:
+    print("Entrada inválida. Insira apenas números.")
