@@ -1,0 +1,34 @@
+class Stack:
+    def __init__(self):
+        self.items = []
+
+    def push(self, item):
+        self.items.append(item)
+
+    def pop(self):
+        return self.items.pop()
+
+    def is_empty(self):
+        return len(self.items) == 0
+
+def bin_p_octal(binario):
+    stack = Stack()
+
+    for digito in binario:
+        stack.push(int(digito))
+
+    octal = ''
+    while not stack.is_empty():
+        numero = 0
+        for _ in range(3):
+            if not stack.is_empty():
+                numero += stack.pop() * (2 ** _)
+        octal += str(numero)
+
+    return octal[::-1]
+
+#Implementando
+
+binario = input("Digite um número binário: ")
+octal = bin_p_octal(binario)
+print(f'{binario} em octal é {octal}.')
