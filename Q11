@@ -1,0 +1,37 @@
+class Stack:
+    def __init__(self):
+        self.items = []
+
+    def push(self, item):
+        self.items.append(item)
+
+    def pop(self):
+        return self.items.pop()
+
+    def is_empty(self):
+        return len(self.items) == 0
+        
+#Ordenando
+
+def sort_crescente(lista):
+    stack = Stack()
+    lista_ordenada = []
+
+    for num in lista:
+        while not stack.is_empty() and stack.items[-1] < num: #Desempilha se o número for menor que o atual
+            lista_ordenada.append(stack.pop())
+
+        stack.push(num) #Desempilha o atual (topo)
+
+    while not stack.is_empty(): #Desempilha o restante
+        lista_ordenada.append(stack.pop()) 
+
+    return lista_ordenada
+
+#Implementando
+
+lista = input("Insira uma lista de números: ").split()
+lista = [int(num) for num in lista]
+
+lista_ordenada = sort_crescente(lista)
+print(f'A lista ordenada: {lista_ordenada}')
