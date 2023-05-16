@@ -1,0 +1,43 @@
+class Stack:
+    def __init__(self):
+        self.items = []
+
+    def push(self, item):
+        self.items.append(item)
+
+    def pop(self):
+        return self.items.pop()
+
+    def is_empty(self):
+        return len(self.items) == 0
+
+def para_polonesa(expressao):
+    pilha = Stack()
+    saida = ''
+    precedencia = {'+': 1, '-': 1, '*': 2, '/': 2}
+
+    for char in expressao:
+        if char.isnumeric():
+            saida += char
+        elif char in ['+', '-', '*', '/']:
+            while (not pilha.is_empty()) and (pilha.items[-1] != '(') and (precedencia[pilha.items[-1]] >= precedencia[char]):
+                saida += pilha.pop()
+            pilha.push(char)
+        elif char == '(':
+            pilha.push(char)
+        elif char == ')':
+            while (not pilha.is_empty()) and (pilha.items[-1] != '('):
+                saida += pilha.pop()
+            pilha.pop()
+
+    while not pilha.is_empty():
+        saida += pilha.pop()
+
+    return saida
+
+#Implementando
+
+expressao = input("Digite uma expressão matemática: ")
+notacao_polonesa = para_polonesa(expressao)
+
+print("Notação Polonesa Reversa:", notacao_polonesa)
