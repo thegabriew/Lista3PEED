@@ -1,0 +1,35 @@
+class Stack:
+    def __init__(self):
+        self.items = []
+
+    def push(self, item):
+        self.items.append(item)
+
+    def pop(self):
+        return self.items.pop()
+
+    def is_empty(self):
+        return len(self.items) == 0
+
+def balanceado(expressao):
+    pilha = Stack()
+
+    for char in expressao:
+        if char == '(':
+            pilha.push(char)
+        elif char == ')':
+            if pilha.is_empty():
+                return False
+            pilha.pop()
+
+    return pilha.is_empty()
+
+# Execução
+
+expressao = input("Digite uma expressão matemática: ")
+esta_balanceado = balanceado(expressao)
+
+if esta_balanceado:
+    print("Os parênteses estão balanceados.")
+else:
+    print("Os parênteses não estão balanceados.")
