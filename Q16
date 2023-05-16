@@ -1,0 +1,35 @@
+class Stack:
+    def __init__(self):
+        self.items = []
+
+    def push(self, item):
+        self.items.append(item)
+
+    def pop(self):
+        return self.items.pop()
+
+    def is_empty(self):
+        return len(self.items) == 0
+
+def hexa_p_dec(hexadecimal):
+    dicionario_hexa = {'0': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9, 'A': 10, 'B': 11, 'C': 12, 'D': 13, 'E': 14, 'F': 15}
+    stack = Stack()
+
+    for num in hexadecimal:
+        stack.push(dicionario_hexa[num])
+
+    numero = 0
+    posicao = 0
+
+    while not stack.is_empty():
+        num = stack.pop()
+        numero += num * (16 ** posicao)
+        posicao += 1
+
+    return numero
+
+# Execução
+
+hexadecimal = input("Digite um número hexadecimal: ")
+decimal = hexa_p_dec(hexadecimal)
+print(f'{hexadecimal} em decimal é {decimal}.')
